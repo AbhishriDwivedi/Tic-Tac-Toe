@@ -21,7 +21,7 @@ const winningPositions = [
 function initGame() {
     currentPlayer = "X";
     gameGrid = ["","","","","","","","",""];
-    //UI pr empty bhi karna padega boxes ko
+    //Reset to original state of boxes
     boxes.forEach((box, index) => {
         box.innerText = "";
         boxes[index].style.pointerEvents = "all";
@@ -29,11 +29,14 @@ function initGame() {
         box.classList = `box box${index+1}`;
     });
     newGameBtn.classList.remove("active");
+    // set winner
     gameInfo.innerText = `Current Player - ${currentPlayer}`;
 }
 
+// start game
 initGame();
 
+// give alternate turns to players
 function swapTurn() {
     if(currentPlayer === "X") {
         currentPlayer = "O";
@@ -100,9 +103,9 @@ function handleClick(index) {
         boxes[index].innerText = currentPlayer;
         gameGrid[index] = currentPlayer;
         boxes[index].style.pointerEvents = "none";
-        //swap karo turn ko
+        //swap to next player
         swapTurn();
-        //check koi jeet toh nahi gya
+        //check whether game is over
         checkGameOver();
     }
 }
